@@ -1,0 +1,417 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SONIQ | Premium Wireless Headphones</title>
+<style>
+
+:root {
+  --purple: #7655e8;
+  --dark: #17152c;
+  --light: #f7f5ff;
+  --pink: #ff7eae;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--light);
+  color: var(--dark);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 8%;
+  background: white;
+}
+
+.logo {
+  font-size: 27px;
+  font-weight: 800;
+  color: var(--purple);
+  letter-spacing: 2px;
+}
+
+nav { display: flex; gap: 30px; }
+nav a {
+  text-decoration: none;
+  color: #555;
+  font-size: 14px;
+  font-weight: 500;
+}
+nav a:hover { color: var(--purple); }
+
+.hero {
+  min-height: 570px;
+  padding: 65px 10%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 35px;
+  background: linear-gradient(120deg,#eee9ff,#e5eaff,#ffe9f2);
+  overflow: hidden;
+}
+
+.hero-content { max-width: 520px; }
+
+.tag {
+  display: inline-block;
+  background: white;
+  color: var(--purple);
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 22px;
+}
+
+h1 {
+  font-size: clamp(42px,5vw,65px);
+  line-height: 1.12;
+  font-weight: 800;
+}
+
+h1 span { color: var(--purple); }
+
+.hero-content p {
+  color: #666;
+  line-height: 1.9;
+  margin: 22px 0;
+  font-size: 15px;
+}
+
+.price {
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--purple);
+  margin-bottom: 20px;
+}
+
+.price small {
+  color: #999;
+  font-size: 15px;
+  text-decoration: line-through;
+  margin-left: 10px;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 600;
+  transition: .25s;
+}
+
+.primary {
+  background: var(--purple);
+  color: white;
+  padding: 15px 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px #7655e844;
+}
+.primary:hover { transform: translateY(-3px); background: #6040d0; }
+
+.product-visual {
+  width: min(390px, 42vw);
+  height: 390px;
+  min-width: 260px;
+  border-radius: 50%;
+  background: linear-gradient(145deg,#a88bff,#7655e8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 25px 60px #7655e855;
+}
+
+.product-visual::before {
+  content: '';
+  position: absolute;
+  width: 75%;
+  height: 75%;
+  border: 2px solid #ffffff55;
+  border-radius: 50%;
+}
+
+.headphone {
+  position: relative;
+  width: 190px;
+  height: 230px;
+  z-index: 1;
+  transform: rotate(-12deg);
+}
+
+.band {
+  position: absolute;
+  width: 165px;
+  height: 175px;
+  border: 23px solid #29263c;
+  border-bottom: 0;
+  border-radius: 100px 100px 0 0;
+  left: 12px;
+  top: 4px;
+  filter: drop-shadow(5px 6px 4px #29263c66);
+}
+
+.cup {
+  position: absolute;
+  width: 55px;
+  height: 100px;
+  top: 112px;
+  background: linear-gradient(90deg,#171525,#625b83,#24213b);
+  border: 5px solid #bcaaff;
+  border-radius: 22px;
+  box-shadow: 5px 8px 12px #17152566;
+}
+.cup.left { left: 0; }
+.cup.right { right: 0; }
+
+.cup::after {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 70px;
+  left: 7px;
+  top: 10px;
+  background: #aaa0d5;
+  border-radius: 15px;
+  opacity: .5;
+}
+
+.features {
+  padding: 75px 8%;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 34px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.subtitle {
+  color: #888;
+  margin-bottom: 40px;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 22px;
+}
+
+.feature {
+  background: white;
+  padding: 30px 22px;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px #32206c0c;
+  transition: .3s;
+}
+.feature:hover { transform: translateY(-7px); }
+
+.feature .emoji { font-size: 35px; margin-bottom: 15px; }
+.feature h3 { margin-bottom: 10px; }
+.feature p { color: #888; font-size: 13px; line-height: 1.8; }
+
+.details {
+  padding: 65px 10%;
+  background: white;
+}
+
+.details-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.details h2 { font-size: 34px; margin-bottom: 18px; }
+.details p { color: #777; line-height: 1.9; font-size: 14px; }
+
+.specs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.spec {
+  background: var(--light);
+  border-radius: 12px;
+  padding: 16px;
+}
+.spec strong { display: block; color: var(--purple); font-size: 19px; }
+.spec small { color: #888; }
+
+.colors { margin-top: 25px; }
+.color {
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  border-radius: 50%;
+  margin: 12px 8px 0 0;
+  cursor: pointer;
+  border: 3px solid white;
+  outline: 1px solid #ccc;
+}
+.color.active { outline: 2px solid var(--purple); }
+
+footer {
+  text-align: center;
+  padding: 30px;
+  background: var(--dark);
+  color: white;
+  font-size: 13px;
+}
+
+@media(max-width:750px) {
+  header { padding: 18px 5%; }
+  nav { gap: 12px; }
+  nav a { font-size: 11px; }
+  .hero { flex-direction: column; text-align: center; padding: 55px 6%; }
+  .product-visual { width: 280px; height: 280px; }
+  .feature-grid { grid-template-columns: 1fr; }
+  .details-content { grid-template-columns: 1fr; gap: 30px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">SONIQ.</div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#features">Features</a>
+    <a href="#details">Specifications</a>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-content">
+    <span class="tag">✦ NEXT GENERATION AUDIO</span>
+    <h1>Hear Every <span>Detail.</span></h1>
+    <p>
+      Discover the SONIQ X1, premium wireless headphones
+      designed for immersive sound, ultimate comfort, and
+      an extraordinary listening experience.
+    </p>
+    <div class="price">$129.99 <small>$169.99</small></div>
+    <button class="primary" onclick="addToCart()">Add to Cart 🛒</button>
+    <p id="cart-message" style="color:#7655e8;font-weight:600"></p>
+  </div>
+
+  <div class="product-visual" id="visual">
+    <div class="headphone">
+      <div class="band"></div>
+      <div class="cup left"></div>
+      <div class="cup right"></div>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <h2 class="section-title">Why Choose SONIQ?</h2>
+  <p class="subtitle">Technology meets comfort and exceptional design.</p>
+
+  <div class="feature-grid">
+    <div class="feature">
+      <div class="emoji">🔊</div>
+      <h3>Premium Sound</h3>
+      <p>Experience rich bass, crystal-clear vocals, and balanced audio across every frequency.</p>
+    </div>
+    <div class="feature">
+      <div class="emoji">🔋</div>
+      <h3>40-Hour Battery</h3>
+      <p>Enjoy extended listening sessions with a powerful battery and fast charging.</p>
+    </div>
+    <div class="feature">
+      <div class="emoji">🎧</div>
+      <h3>Active Noise Cancellation</h3>
+      <p>Block distracting background sounds and focus on what matters most.</p>
+    </div>
+    <div class="feature">
+      <div class="emoji">📡</div>
+      <h3>Bluetooth 5.3</h3>
+      <p>Stable wireless connectivity with low latency and reliable performance.</p>
+    </div>
+    <div class="feature">
+      <div class="emoji">☁️</div>
+      <h3>Ergonomic Design</h3>
+      <p>Soft memory foam cushions and an adjustable headband for all-day comfort.</p>
+    </div>
+    <div class="feature">
+      <div class="emoji">🎙️</div>
+      <h3>Clear Microphone</h3>
+      <p>Communicate effortlessly with clear voice capture during calls and meetings.</p>
+    </div>
+  </div>
+</section>
+
+<section class="details" id="details">
+  <div class="details-content">
+    <div>
+      <span class="tag">PRODUCT OVERVIEW</span>
+      <h2>SONIQ X1 Wireless Headphones</h2>
+      <p>
+        The SONIQ X1 combines modern aesthetics with powerful
+        audio technology. Built for students, professionals,
+        travelers, and music enthusiasts, it delivers an
+        immersive experience wherever life takes you.
+      </p>
+
+      <div class="colors">
+        <strong>Available Colors</strong><br>
+        <span class="color active" style="background:#25243a"
+          onclick="changeColor('#7655e8',this)" title="Midnight Black"></span>
+        <span class="color" style="background:#e5d8ce"
+          onclick="changeColor('#e8bfa8',this)" title="Sand"></span>
+        <span class="color" style="background:#8c79ed"
+          onclick="changeColor('#8c79ed',this)" title="Purple"></span>
+      </div>
+    </div>
+
+    <div>
+      <h2>Technical Specifications</h2>
+      <p>Essential product information and technical details.</p>
+      <div class="specs">
+        <div class="spec"><strong>40 hrs</strong><small>Battery Life</small></div>
+        <div class="spec"><strong>5.3</strong><small>Bluetooth Version</small></div>
+        <div class="spec"><strong>20Hz–20kHz</strong><small>Frequency Response</small></div>
+        <div class="spec"><strong>32Ω</strong><small>Impedance</small></div>
+        <div class="spec"><strong>280g</strong><small>Product Weight</small></div>
+        <div class="spec"><strong>USB-C</strong><small>Charging Port</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="logo" style="color:white;margin-bottom:10px">SONIQ.</div>
+  <p>Sound Beyond Expectations.</p>
+  <p style="margin-top:12px;color:#aaa">© 2026 SONIQ. All Rights Reserved.</p>
+</footer>
+
+<script>
+function addToCart() {
+  document.getElementById('cart-message').textContent =
+    '✓ SONIQ X1 added to your cart!';
+}
+
+function changeColor(color, element) {
+  document.getElementById('visual').style.background =
+    `linear-gradient(145deg, ${color}, #7655e8)`;
+
+  document.querySelectorAll('.color').forEach(c =>
+    c.classList.remove('active')
+  );
+  element.classList.add('active');
+}
+</script>
+
+</body>
+</html>
