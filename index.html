@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,10 +15,42 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+html { scroll-behavior: smooth; }
+
 body {
   font-family: 'Poppins', sans-serif;
   background: linear-gradient(135deg, #eef6ff, #fff0f6);
   color: var(--dark);
+}
+
+/* Dark Mode */
+body.dark {
+  background: #17152c;
+  color: white;
+}
+
+body.dark header,
+body.dark .features,
+body.dark .details {
+  background: #292641;
+  color: white;
+}
+
+body.dark .feature,
+body.dark .spec,
+body.dark .about-card {
+  background: #393451;
+  color: white;
+}
+
+body.dark p,
+body.dark nav a {
+  color: #ddd;
+}
+
+.darkmode {
+  padding: 5px;
+  border-radius: 3px;
 }
 
 header {
@@ -37,7 +68,7 @@ header {
   letter-spacing: 2px;
 }
 
-nav { display: flex; gap: 30px; }
+nav { display: flex; align-items: center; gap: 30px; }
 nav a {
   text-decoration: none;
   color: #555;
@@ -45,6 +76,15 @@ nav a {
   font-weight: 500;
 }
 nav a:hover { color: var(--purple); }
+
+.cart-badge {
+  background: var(--purple);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+}
 
 .hero {
   min-height: 570px;
@@ -115,6 +155,24 @@ button {
   box-shadow: 0 8px 20px #7655e844;
 }
 .primary:hover { transform: translateY(-3px); background: #6040d0; }
+
+/* Cart Controls */
+.cart-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 12px;
+}
+
+.qty-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: white;
+  color: var(--purple);
+  font-size: 18px;
+  box-shadow: 0 4px 10px #00000015;
+}
 
 .product-visual {
   width: min(390px, 42vw);
@@ -261,6 +319,31 @@ button {
 }
 .color.active { outline: 2px solid var(--purple); }
 
+/* About Card */
+.about-card {
+  display: none;
+  max-width: 560px;
+  margin: 28px auto 0;
+  background: white;
+  padding: 28px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px #32206c14;
+  text-align: left;
+  border-top: 4px solid var(--purple);
+}
+
+.about-card h3 {
+  color: var(--purple);
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.about-card p {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
 footer {
   text-align: center;
   padding: 30px;
@@ -269,20 +352,19 @@ footer {
   font-size: 13px;
 }
 
-footer button{
-  background-color:white ;
+footer button {
+  background-color: white;
   margin-top: 20px;
   padding: 10px 25px;
   border-radius: 20px;
-
 }
 
-footer button a{
+footer button a {
   text-decoration: none;
 }
 
 @media(max-width:750px) {
-  header { padding: 18px 5%; }
+  header { padding: 18px 5%; flex-wrap: wrap; gap: 10px; }
   nav { gap: 12px; }
   nav a { font-size: 11px; }
   .hero { flex-direction: column; text-align: center; padding: 55px 6%; }
@@ -302,6 +384,8 @@ footer button a{
     <a href="#details">Specifications</a>
     <a href="#about">About Us</a>
     <a href="mailto:omarnagi2008@gmail.com">Contact</a>
+    <span class="cart-badge" id="cart-badge">🛒 0</span>
+    <button class="darkmode" onclick="darkMode()">🌙 Dark Mode</button>
   </nav>
 </header>
 
@@ -317,8 +401,17 @@ footer button a{
       Enjoy your favorite music wherever you go.
     </p>
     <div class="price">$129.99 <small>$169.99</small></div>
-    <button class="primary" onclick="addToCart()">Add to Cart 🛒</button>
-    <p id="cart-message" style="color:#7655e8;font-weight:600"></p>
+
+    <div>
+      <button class="primary" onclick="updateCart(1)">Add to Cart 🛒</button>
+      <span class="cart-controls" id="qty-controls" style="display:none;">
+        <button class="qty-btn" onclick="updateCart(-1)">−</button>
+        <strong id="qty-count">1</strong>
+        <button class="qty-btn" onclick="updateCart(1)">+</button>
+      </span>
+    </div>
+
+    <p id="cart-message" style="color:#7655e8;font-weight:600;margin-top:12px;"></p>
   </div>
   <div class="product-visual" id="visual">
     <div class="headphone">
@@ -411,6 +504,18 @@ footer button a{
     SONIQ creates stylish audio products that make listening
     to music more enjoyable, comfortable, and accessible.
   </p>
+
+  <button class="primary" id="about-btn" onclick="toggleAboutCard()">Learn More</button>
+
+  <div class="about-card" id="about-card">
+    <h3>Our Story &amp; Mission</h3>
+    <p>
+      Founded by audio engineers and everyday listeners, SONIQ is dedicated to
+      delivering studio-grade acoustics without the luxury markup. Every pair of
+      SONIQ headphones is tuned for balanced clarity, tested for all-day wear,
+      and backed by a 2-year warranty.
+    </p>
+  </div>
 </section>
 
 <footer>
@@ -421,9 +526,41 @@ footer button a{
 </footer>
 
 <script>
-function addToCart() {
-  document.getElementById('cart-message').textContent =
-    '✓ SONIQ X1 added to your cart!';
+let cartCount = 0;
+const unitPrice = 129.99;
+
+// Feature 1: Interactive Cart Quantity & Total Calculator
+function updateCart(change) {
+  cartCount = Math.max(0, cartCount + change);
+
+  document.getElementById('cart-badge').textContent = `🛒 ${cartCount}`;
+  document.getElementById('qty-count').textContent = cartCount;
+
+  const controls = document.getElementById('qty-controls');
+  const message = document.getElementById('cart-message');
+
+  if (cartCount > 0) {
+    controls.style.display = 'inline-flex';
+    const total = (cartCount * unitPrice).toFixed(2);
+    message.textContent = `✓ ${cartCount}× SONIQ X1 in your cart — Total: $${total}`;
+  } else {
+    controls.style.display = 'none';
+    message.textContent = '';
+  }
+}
+
+// Feature 2: Toggle About Us Card
+function toggleAboutCard() {
+  const card = document.getElementById('about-card');
+  const btn = document.getElementById('about-btn');
+  const isHidden = card.style.display === '' || card.style.display === 'none';
+
+  card.style.display = isHidden ? 'block' : 'none';
+  btn.textContent = isHidden ? 'Show Less' : 'Learn More';
+}
+
+function darkMode() {
+  document.body.classList.toggle("dark");
 }
 
 function changeColor(color, element) {
