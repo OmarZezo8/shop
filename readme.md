@@ -1,21 +1,20 @@
 # SONIQ | Best headphones website
 
-A responsive, modern product landing page for the **SONIQ X1 Wireless Headphones**, built with pure HTML, CSS, and vanilla JavaScript.
+A responsive, modern product landing page for the **SONIQ X1 Wireless Headphones**, built with pure HTML, CSS, and JavaScript.
 
 ## Features
 
-- **Interactive Shopping Cart & Quantity Stepper:** Users can add the SONIQ X1 to their cart, adjust item quantities (`+` / `−`), view a live cart counter badge in the navigation bar, and see the dynamically calculated total price.
 - **Expandable "About Us" Story Card:** Clicking the **Learn More** button in the About section smoothly toggles an informational brand story card and updates the button state.
-- **Dark Mode Toggle:** Instant light/dark theme switching across the header, hero, feature cards, specifications, and modals.
-- **Color Swatch Preview:** Interactive color selector (`Midnight Black`, `Sand`, `Purple`) that dynamically updates the product backdrop gradient.
-- **Pure CSS Product Illustration:** Custom CSS-crafted headphone artwork with no external image dependencies.
+- **Dark Mode Button:** light/dark theme switching across the header, hero, feature cards, specifications, and modals.
+- **Color Switch Preview:** Interactive color selector (`Midnight Black`, `Sand`, `Purple`) that dynamically updates the product backdrop gradient.
 - **Responsive Design:** Adapts cleanly across desktop, tablet, and mobile screen sizes.
+- - **Interactive Shopping Cart & Quantity Stepper:** Users can add the headphone to their cart, adjust item quantities (`+` / `−`), view a live cart counter badge in the navigation bar, and see the dynamically calculated total price.
 
-## Technologies Used
+## Programming Languages Used
 
-- **HTML5** — Semantic structure and section navigation
-- **CSS3** — Custom properties (variables), Flexbox, CSS Grid, gradients, and keyframe/transition effects
-- **JavaScript (ES6)** — DOM manipulation for cart state, card toggling, theme switching, and color previews
+- **HTML5** — Main building block for the entire website 
+- **CSS3** — Modifying a captivating design via classes attributes and adjusting website main colors
+- **JavaScript (ES6)** — Responsible for interactive media in the website and controlling some essential features that are mentioned above
 
 ## Project Structure
 
